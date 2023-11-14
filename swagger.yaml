@@ -153,9 +153,6 @@ tags:
   - name: Internal Job Finisher
     description: "`internal` Endpoints used by scraper agents to execute the finisher scripton the job container."
   
-  - name: Data Connector
-    description: "`EXPERIMENTAL` Allows connectivity with external BI tools, such as Google Data Studio."
-
 
 paths:
   /scrapers:
@@ -978,68 +975,6 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/ExporterSuccess'
-        400:
-          $ref: '#/components/responses/AuthTokenMissing'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-        422:
-          $ref: '#/components/responses/UnprocessableEntity'
-  /scrapers/{name}/exporters/{exporter_name}/schema:
-    get:
-      tags:
-      - Data Connector
-      summary: Show a JSON Schema or Tabular Schema on a Scraper Exporter
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '#/components/parameters/ScraperName'
-        - $ref: '#/components/parameters/ExporterName'
-        - $ref: '#/components/parameters/SchemaType'
-        - $ref: '#/components/parameters/ConnectorType'
-      responses:
-        200:
-          $ref: '#/components/responses/SchemaSuccess'
-        400:
-          $ref: '#/components/responses/AuthTokenMissing'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-        422:
-          $ref: '#/components/responses/UnprocessableEntity'
-  /scrapers/{name}/exporters/{exporter_name}/exports/latest/get_data:
-    get:
-      tags:
-      - Data Connector
-      summary: Get all the latest exported data by an Exporter. This is the full data dump, without pagination. Used to connect to BI Tools such as Google Data Studio.
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '#/components/parameters/ScraperName'
-        - $ref: '#/components/parameters/ExporterName'
-        - $ref: '#/components/parameters/ConnectorType'
-        - $ref: '#/components/parameters/ExportFields'
-      responses:
-        200:
-          $ref: '#/components/responses/ConnectorDataSuccess'
-        400:
-          $ref: '#/components/responses/AuthTokenMissing'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-        422:
-          $ref: '#/components/responses/UnprocessableEntity'
-  /scrapers/exports/{export_id}/get_data:
-    get:
-      tags:
-      - Data Connector
-      summary: Get all the latest exported data on an Export. This is the full data dump, without pagination. Used to connect to BI Tools such as Google Data Studio.
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '#/components/parameters/ExportID'
-        - $ref: '#/components/parameters/ConnectorType'
-        - $ref: '#/components/parameters/ExportFields'
-      responses:
-        200:
-          $ref: '#/components/responses/ConnectorDataSuccess'
         400:
           $ref: '#/components/responses/AuthTokenMissing'
         401:
